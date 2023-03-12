@@ -160,6 +160,77 @@ public class SinglyLinkedList {
         }
         return mainPtr;
     }
+
+    //The List should be sorted.
+    public ListNode insertInSortedList(int value) {
+        ListNode NewNode = new ListNode(value);
+
+        if(head == null)    return NewNode;
+
+        ListNode currentNode = head;
+        ListNode tempNode = null;
+
+        while(currentNode != null && currentNode.data < NewNode.data) {
+            tempNode = currentNode;
+            currentNode = currentNode.next;
+        }
+
+        NewNode.next = currentNode;
+        tempNode.next = NewNode;
+        return head;
+    }
+
+    //The method will remove a given key from the List
+    public void deleteNode(int key) {
+        ListNode current = head;
+        ListNode temp = null;
+
+        if(current != null && current.data == key) {
+            head = current.next;
+            return;
+        }
+
+        while(current != null && current.data != key) {
+            temp = current;
+            current = current.next;
+        }
+
+        if(current == null) return;
+
+        temp.next = current.next;
+    }
+
+    //The method will help us to detect a loop
+    public boolean detectLoop() {
+        ListNode fastPtr = head;
+        ListNode slowPtr = head;
+
+        while(fastPtr != null && fastPtr.next != null) {
+            fastPtr = fastPtr.next.next;
+            slowPtr = slowPtr.next;
+            
+            if(slowPtr == fastPtr)  return true;
+        }
+        return false;
+    }
+
+    //This method creates a Loop in a list
+    public void createALoopInList() {
+        ListNode first = new ListNode(1);
+        ListNode second = new ListNode(2);
+        ListNode third = new ListNode(3);
+        ListNode fourth = new ListNode(4);
+        ListNode fifth = new ListNode(5);
+        ListNode sixth = new ListNode(6);
+
+        head = first;
+        first.next = second;
+        second.next = third;
+        third.next = fourth;
+        fourth.next = fifth;
+        fifth.next = sixth;
+        sixth.next = third;
+    }
     public static void main(String[] args) {
         SinglyLinkedList sll = new SinglyLinkedList();
         sll.head = new ListNode(10);
@@ -186,6 +257,7 @@ public class SinglyLinkedList {
         ListNode nthNode = sll.getNthNodeFromEnd(2);
         System.out.println("Nth node from the end is: " + nthNode.data);
 
+        sll.insertInSortedList(112);
         //sll.deleteFirstNode();
         //sll.deleteFirstNode();
         //sll.deleteLastNode();
@@ -194,7 +266,12 @@ public class SinglyLinkedList {
         //sll.deleteDesiredNode(4);
         //sll.deleteDesiredNode(6);
         System.out.println(sll.searchElement(80));
+        sll.deleteNode(100);
         sll.display();
+
+        sll.createALoopInList();
+
+        System.out.println("There is a loop in a list: " + sll.detectLoop());
 
         
     }
