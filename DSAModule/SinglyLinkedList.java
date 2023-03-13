@@ -214,6 +214,59 @@ public class SinglyLinkedList {
         return false;
     }
 
+    //Floyds algorithm to detect start of a loop
+    public ListNode getStartNode() {
+        ListNode fastPtr = head;
+        ListNode slowPtr = head;
+
+        while(fastPtr != null && fastPtr.next != null) {
+            fastPtr = fastPtr.next.next;
+            slowPtr = slowPtr.next;
+
+            if(fastPtr == slowPtr) {
+                return getStartingNode(slowPtr);
+            }
+        }
+        return null;
+    }
+    //The method used in getStartNode method.
+    public ListNode getStartingNode(ListNode slowPtr) {
+        ListNode temp = head;
+        
+        while(slowPtr != temp) {
+            temp = temp.next;
+            slowPtr = slowPtr.next;
+        }
+        return temp;
+    }
+
+    //The method to remove a loop
+    public void removeLoop() {
+        ListNode fastPtr = head;
+        ListNode slowPtr = head;
+
+        while(fastPtr != null && fastPtr.next != null) {
+            fastPtr = fastPtr.next.next;
+            slowPtr = slowPtr.next;
+
+            if(fastPtr == slowPtr) {
+                removeLoop(slowPtr);
+                return;
+            }
+        }
+
+    }
+
+    //The method used in "removeLoop"
+    public void removeLoop(ListNode slowPtr) {
+        ListNode temp = head;
+        while(temp.next != slowPtr.next) {
+            temp = temp.next;
+            slowPtr = slowPtr.next;
+        }
+        slowPtr.next = null;
+    }
+
     //This method creates a Loop in a list
     public void createALoopInList() {
         ListNode first = new ListNode(1);
@@ -270,8 +323,10 @@ public class SinglyLinkedList {
         sll.display();
 
         sll.createALoopInList();
+        //sll.removeLoop();
 
         System.out.println("There is a loop in a list: " + sll.detectLoop());
+        //System.out.println(sll.getStartNode().data);
 
         
     }
