@@ -1,6 +1,11 @@
 public class SinglyLinkedList {
     private ListNode head;
 
+    //Creating a constructor for a demonstartion purpose
+    SinglyLinkedList() {
+        System.out.println("I am inevitable...");
+    }
+
     private static class ListNode {
         private int data;
         private ListNode next;
@@ -284,6 +289,7 @@ public class SinglyLinkedList {
         fifth.next = sixth;
         sixth.next = third;
     }
+
     public static void main(String[] args) {
         SinglyLinkedList sll = new SinglyLinkedList();
         sll.head = new ListNode(10);
