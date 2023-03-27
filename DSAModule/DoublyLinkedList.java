@@ -85,12 +85,10 @@ public class DoublyLinkedList {
     }
 
     public ListNode deleteFirstNode() {
-
         if(isEmpty()) {
             throw new NoSuchElementException();
         }
         ListNode temp = head;
-
         if(head == tail) {
             tail = null;
         } else {
@@ -104,18 +102,15 @@ public class DoublyLinkedList {
     }
 
     public void deleteLastNode() {
-
         if(isEmpty()) {
             throw new NoSuchElementException();
         }
         ListNode temp = tail;
-
         if(head == tail) {
             head = null;
         } else {
             tail.previous.next = null;
         }
-
         tail = tail.previous;
         temp.previous = null;
         length--;
