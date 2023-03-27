@@ -1,3 +1,5 @@
+import java.util.NoSuchElementException;
+
 public class DoublyLinkedList {
 
     private ListNode head;
@@ -39,6 +41,7 @@ public class DoublyLinkedList {
         } else {
             tail.next = newNode;
         }
+
         newNode.previous = tail;
         tail = newNode;
         length++;
@@ -53,6 +56,7 @@ public class DoublyLinkedList {
         } else {
             head.previous = newNode;
         }
+
         newNode.next = head;
         head = newNode;
         length++;
@@ -79,6 +83,43 @@ public class DoublyLinkedList {
         }
         System.out.println("null");
     }
+
+    public ListNode deleteFirstNode() {
+
+        if(isEmpty()) {
+            throw new NoSuchElementException();
+        }
+        ListNode temp = head;
+
+        if(head == tail) {
+            tail = null;
+        } else {
+            head.next.previous = null;
+        }
+
+        head = head.next;
+        temp.next = null;
+        length--;
+        return temp;
+    }
+
+    public void deleteLastNode() {
+
+        if(isEmpty()) {
+            throw new NoSuchElementException();
+        }
+        ListNode temp = tail;
+
+        if(head == tail) {
+            head = null;
+        } else {
+            tail.previous.next = null;
+        }
+
+        tail = tail.previous;
+        temp.previous = null;
+        length--;
+    }
     public static void main(String[] args) {
         
         DoublyLinkedList dll = new DoublyLinkedList();
@@ -88,6 +129,8 @@ public class DoublyLinkedList {
         dll.insertAtBeginning(0);
         dll.insertAtBeginning(-1);
 
+        System.out.println("Deleted node: " + dll.deleteFirstNode());
+        dll.deleteLastNode();
         dll.displayForward();
         System.out.println("---------------------------");
         dll.displayBackward();
