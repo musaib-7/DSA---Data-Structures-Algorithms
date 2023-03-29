@@ -4,5 +4,9 @@ public class Dog implements AnimalStuff {
     public void poop() {
         System.out.println("bhejrlwhfsj");
     }
+
+    public void eat() {
+        System.out.println("I am eating...");
+    }
     
 }

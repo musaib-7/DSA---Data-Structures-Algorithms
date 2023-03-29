@@ -1,4 +1,4 @@
-public class SinglyLinkedList {
+ public class SinglyLinkedList {
     private ListNode head;
 
     //Creating a constructor for a demonstartion purpose
