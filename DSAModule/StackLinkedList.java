@@ -45,6 +45,9 @@ public class StackLinkedList {
     }
 
     public void displayStack() {
+        if(isEmpty()) {
+            throw new EmptyStackException();
+        }
         ListNode temp = tos;
         int index = 0;
         int length = getLength();
